@@ -1,0 +1,10 @@
+memset(&service, 0, sizeof(service));
+CLOSE_SOCKET(connectSocket);
+fclose(pFile);
+myfunc(x,y);
+WSACleanup();
+strcat(data, "file.txt");
+goodG2B();
+fprintf(stdout, "Lines entered successfully\n");
+MD5();
+MD5(const std::string& text);

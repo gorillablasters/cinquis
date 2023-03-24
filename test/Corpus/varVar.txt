@@ -1,0 +1,6 @@
+c = a + b;
+var1 = var2;
+myvar = c;
+var1 = a;
+var2 = c;
+c = var1;

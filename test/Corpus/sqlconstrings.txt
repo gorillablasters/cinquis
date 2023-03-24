@@ -1,0 +1,5 @@
+ retcode = SQLDriverConnect(hdbc, NULL, "Driver=ODBC Driver 13 for SQL"
+"Server;Server=<yourserver>;Uid=<yourusername>;Pwd=<"
+"yourpassword>;database=<yourdatabase>",
+SQL_NTS, outstr, sizeof(outstr), &outstrlen, SQL_DRIVER_NOPROMPT);
+(SQLWCHAR*)TEXT("DRIVER={SQL Server};SERVER=WIN-QNPAH3SE4CK\SQLSRV,1433;DATABASE=dummy;UID=sa;PWD=sasasasa;Trusted_Connection=no;")
