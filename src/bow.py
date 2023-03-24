@@ -1,14 +1,54 @@
 import nltk
+import json
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+
 
 nltk.download('stopwords')
 
 stemmer = PorterStemmer()
 stops = set(stopwords.words('english'))
 
-ignore_words = ['?', '.', '!','"',',',':']
+class bow_from_json:
+
+    def __init__(self, filePath):
+        self.all_words = []
+        self.tags = []
+        self.xy = []
+        self.X_train = []
+        self.y_train = []
+
+        with open(filePath, 'r') as f:
+            intents = json.load(f)
+        #loop through each sentence in our intents patterns
+        for intent in intents['intents']:
+            tag = intent['tag']
+            # add to tag list
+            self.tags.append(tag)
+            for pattern in intent['patterns']:
+                #print(pattern)
+                # tokenize each word in the sentence
+                w = tokenize(pattern)
+                # add to our words list
+                self.all_words.extend(w)
+                # add to xy pair
+                self.xy.append((w, tag))
+
+        self.all_words = [stem(w) for w in self.all_words if w not in stops]
+        ## remove duplicates and sort
+        self.all_words = sorted(set(self.all_words))
+
+        for (pattern_sentence, tag) in self.xy:
+            # X: bag of words for each pattern_sentence
+            bag = bag_of_words_from_cleaned(pattern_sentence, self.all_words)
+            self.X_train.append(bag)
+            # y: PyTorch CrossEntropyLoss needs only class labels, not one-hot
+            label = self.tags.index(tag)
+            self.y_train.append(label)
+
+        self.X_train = np.array(self.X_train)
+        self.y_train = np.array(self.y_train)
 
 def tokenize(sentence):
     """
@@ -59,3 +99,27 @@ def bag_of_words(sentence, text):
             bag[idx] = 1
 
     return bag
+
+def bag_of_words_from_cleaned(sentence_words, words):
+    ## initialize bag with 0 for each word
+    bag = np.zeros(len(words), dtype=np.float32)
+    for idx, w in enumerate(words):
+        if w in sentence_words:
+            bag[idx] = 1
+
+    return bag
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
