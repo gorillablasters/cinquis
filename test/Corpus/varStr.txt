@@ -1,4 +1,0 @@
-char myLetter = 'D';
-string myText = "Hello";
-var = "test one";
-myvar = "a string"
