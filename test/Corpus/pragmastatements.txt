@@ -1,8 +1,0 @@
-#pragma startup func1 
-#pragma exit func2
-#pragma warn +xxx
-#pragma warn -xxx 
-#pragma warn .xxx 
-#pragma warn -rvl 
-#pragma warn -par 
-#pragma warn -rch 

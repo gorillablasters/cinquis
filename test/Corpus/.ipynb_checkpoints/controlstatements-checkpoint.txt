@@ -1,8 +1,0 @@
-if (replace)
-if (x > 10)
-if (var == var2)
-if (x != 10)
-if (x==z)
-while (0);
-if (connectSocket != INVALID_SOCKET)
-break;
